@@ -1,3 +1,5 @@
+package kata
+
 /*
 Count the number of Duplicates
 
@@ -16,7 +18,16 @@ Example
 */
 
 fun duplicateCount(input: String): Int {
-    return 1
+    var counter = 0
+    var inputTemp = input
+    inputTemp.forEach { singleLetter ->
+        val singleLetterIndex = inputTemp.indexOf(singleLetter, inputTemp.indexOf(singleLetter) + 1)
+        if (singleLetterIndex > 0) {
+            inputTemp = inputTemp.replace(singleLetter.toString(), "")
+            counter++
+        }
+    }
+    return counter
 }
 
 fun `abcde returns zero`() {
@@ -24,7 +35,7 @@ fun `abcde returns zero`() {
 }
 
 fun `abcdea returns one`() {
-    print("${1 == duplicateCount("abcdea")}\n")
+    print("${1 == duplicateCount("abcdea")} ${duplicateCount("abcdea")}\n")
 }
 
 fun `indivisibility returns one`() {
